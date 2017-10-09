@@ -24,6 +24,7 @@
         <!-- Dependencies -->
         <spark.version>2.2.0</spark.version>
         <emr-dynamodb-hadoop.version>4.2.0</emr-dynamodb-hadoop.version>
+        <elasticsearch-hadoop.version>5.6.2</elasticsearch-hadoop.version>
         <junit.version>4.10</junit.version>
     </properties>
 
@@ -56,6 +57,18 @@
             <groupId>com.amazon.emr</groupId>
             <artifactId>emr-dynamodb-hadoop</artifactId>
             <version>${emr-dynamodb-hadoop.version}</version>
+        </dependency>
+        <!-- Elastic Search -->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-hadoop</artifactId>
+            <version>${elasticsearch-hadoop.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>log4j-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- Junit -->
         <dependency>
