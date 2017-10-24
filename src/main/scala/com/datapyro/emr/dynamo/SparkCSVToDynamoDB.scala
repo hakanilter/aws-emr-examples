@@ -18,7 +18,6 @@ import org.apache.spark.sql.functions.udf
   * You should download NYSE data from https://s3.amazonaws.com/hw-sandbox/tutorial1/NYSE-2000-2001.tsv.gz and
   * create a table which a primary partition key called "id"
   *
-  * Don't forget to set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.
   */
 object SparkCSVToDynamoDB extends App {
 
