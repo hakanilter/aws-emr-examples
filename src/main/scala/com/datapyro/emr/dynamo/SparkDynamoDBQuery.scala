@@ -8,7 +8,7 @@ import org.apache.hadoop.mapred.JobConf
 import org.apache.spark.sql.SparkSession
 
 /**
-  * Don't forget to set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.
+  * This example shows how to query DynamoDB via Spark SQL
   */
 object SparkDynamoDBQuery extends App {
 

@@ -14,6 +14,7 @@ import org.apache.spark.sql.SparkSession
   * Test accuracy should be around 0.9987715562627232
   *
   * https://www.kaggle.com/dalpozz/creditcardfraud/data
+  *
   */
 object SparkCreditCardFraudClassifier extends App {
 
