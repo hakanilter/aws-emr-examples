@@ -9,6 +9,7 @@ import org.apache.spark.sql.SparkSession
 /**
   * This example uses Kaggle "Credit Card Fraud Detection" Data set
   * in order to classify which record is fraud, which is not
+  * with using Logistic Regression
   *
   * Test accuracy should be around 0.9987715562627232
   *
