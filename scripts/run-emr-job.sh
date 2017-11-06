@@ -1,2 +1,9 @@
 #!/bin/bash
-aws emr add-steps --cluster-id j-6VU4YCSB7H0B --steps Type=spark,Name=EmrExample,Args=[--deploy-mode,cluster,--class,com.datapyro.emr.spark.SparkEmrExample,--master,yarn,--conf,spark.yarn.submit.waitAppCompletion=false,s3://datapyro-emr/example/app/emr-example-1.0.0-SNAPSHOT.jar,s3://datapyro-emr/example/data,s3://datapyro-emr/example/output],ActionOnFailure=CONTINUE
+
+CLUSTER_ID="j-123456"
+CLASS_NAME="com.datapyro.emr.spark.SparkS3Aggregation"
+JAR_LOCATION="s3://datapyro-emr/example/app/emr-example-1.0.0-SNAPSHOT.jar"
+INPUT_FOLDER="s3://datapyro-emr/example/data"
+OUTPUT_FOLDER="s3://datapyro-emr/example/output"
+
+aws emr add-steps --cluster-id $CLUSTER_ID --steps Type=spark,Name=EmrExample,Args=[--deploy-mode,cluster,--class,$CLASS_NAME,--master,yarn,--conf,spark.yarn.submit.waitAppCompletion=false,$JAR_LOCATION,$INPUT_FOLDER,$OUTPUT_FOLDER],ActionOnFailure=CONTINUE
