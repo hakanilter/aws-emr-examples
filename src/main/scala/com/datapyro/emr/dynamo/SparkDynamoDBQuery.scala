@@ -88,7 +88,7 @@ object SparkDynamoDBQuery extends App {
     ORDER BY
       total_stock_volume DESC
   """
-  val result = spark.sqlContext.sql(sql)
+  val result = spark.sql(sql)
   result.show()
   
 }
