@@ -25,7 +25,9 @@
         <spark.version>2.2.0</spark.version>
         <emr-dynamodb-hadoop.version>4.2.0</emr-dynamodb-hadoop.version>
         <elasticsearch-hadoop.version>6.0.0</elasticsearch-hadoop.version>
-        <mysql.version>5.1.45</mysql.version>
+        <solr-spark.version>3.3.3</solr-spark.version>
+        <httpclient.version>4.4.1</httpclient.version>
+        <mysql.version>6.0.6</mysql.version>
         <slf4j.version>1.7.25</slf4j.version>
         <junit.version>4.10</junit.version>
     </properties>

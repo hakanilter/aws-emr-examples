@@ -6,8 +6,9 @@ import org.apache.spark.sql.SparkSession
 
 /**
   * This example reads data from a jdbc source and saves as parquet
+  *
   */
-object SparkJDBCDataRead extends App {
+object SparkJDBCBackup extends App {
 
   // check args
   if (args.length != 5) {
@@ -29,12 +30,12 @@ object SparkJDBCDataRead extends App {
     .getOrCreate()
 
   // read from database
-  val sourceProperties: Properties = new Properties
-  sourceProperties.setProperty("user", user)
-  sourceProperties.setProperty("password", pass)
+  val properties: Properties = new Properties
+  properties.setProperty("user", user)
+  properties.setProperty("password", pass)
 
   val df = spark.read
-      .jdbc(url, table, sourceProperties)
+      .jdbc(url, table, properties)
   df.show()
 
   // write as parquet

@@ -8,7 +8,7 @@ import org.apache.spark.sql.SparkSession
   * Download NYSE data from https://s3.amazonaws.com/hw-sandbox/tutorial1/NYSE-2000-2001.tsv.gz before running the job.
   *
   */
-object SparkS3Aggregation extends App {
+object SparkS3BinaryData extends App {
 
   // check args
   if (args.length != 2) {
@@ -46,11 +46,12 @@ object SparkS3Aggregation extends App {
       stock_symbol,
       date
   """
-  val result = spark.sqlContext.sql(sql)
+  val result = spark.sql(sql)
 
   // save results as parquet
   result.write
     .mode("overwrite")
+    .option("compression", "gzip")
     .parquet(output)
 
 }
