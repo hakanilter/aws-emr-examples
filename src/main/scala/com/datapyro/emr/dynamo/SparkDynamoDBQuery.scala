@@ -12,7 +12,12 @@ import org.apache.spark.sql.SparkSession
   */
 object SparkDynamoDBQuery extends App {
 
-  val dynamoTableName = "NYSE"
+  // check args
+  if (args.length != 1) {
+    println("Invalid usage! You should provide an input folder and a DynamoDB table name!")
+    System.exit(-1)
+  }
+  val dynamoTableName = args(0)
 
   // initialize context
   val sparkMaster: Option[String] = Option(System.getProperty("spark.master"))

@@ -41,6 +41,7 @@ object SparkCSVToElasticSearch extends App {
     .option("sep", "\t")
     .option("header", "true")
     .csv(input)
+    .repartition(1024)
 
   val extended = df
     // add required columns

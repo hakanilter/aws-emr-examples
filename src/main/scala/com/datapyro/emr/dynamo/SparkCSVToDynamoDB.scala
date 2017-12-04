@@ -69,6 +69,7 @@ object SparkCSVToDynamoDB extends App {
   // save
   val columns = df.columns
   df.javaRDD
+    .repartition(1024)
     .mapToPair(new PairFunction[Row, Text, DynamoDBItemWritable]() {
       @throws[Exception]
       override def call(row: Row): (Text, DynamoDBItemWritable) = {
