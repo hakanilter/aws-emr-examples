@@ -1,5 +1,6 @@
 package com.datapyro.emr.spark
 
+
 import org.apache.spark.sql.SparkSession
 
 /**
@@ -8,34 +9,36 @@ import org.apache.spark.sql.SparkSession
   * Download NYSE data from https://s3.amazonaws.com/hw-sandbox/tutorial1/NYSE-2000-2001.tsv.gz before running the job.
   *
   */
-object SparkS3BinaryData extends App {
+object SparkS3BinaryData {
 
-  // check args
-  if (args.length != 2) {
-    println("Invalid usage! You should provide input and output folders!")
-    System.exit(-1)
-  }
-  val input = args(0)
-  val output = args(1)
+  def main(args: Array[String]): Unit = {
+    // check args
+    if (args.length != 2) {
+      println("Invalid usage! You should provide input and output folders!")
+      System.exit(-1)
+    }
+    val input = args(0)
+    val output = args(1)
 
-  // initialize context
-  val sparkMaster: Option[String] = Option(System.getProperty("spark.master"))
+    // initialize context
+    val sparkMaster: Option[String] = Option(System.getProperty("spark.master"))
 
-  val spark = SparkSession.builder
-    .master(sparkMaster.getOrElse("yarn"))
-    .appName(getClass.getSimpleName)
-    .getOrCreate()
+    val spark = SparkSession.builder
+      .master(sparkMaster.getOrElse("yarn"))
+      .appName(getClass.getSimpleName)
+      .getOrCreate()
 
-  // load csv as a data frame
-  val df = spark.read
-    .option("sep", "\t")
-    .option("header", "true")
-    .csv(input)
-  df.createOrReplaceTempView("nyse")
-  df.printSchema()
+    // load csv as a data frame
+    val df = spark.read
+      .option("sep", "\t")
+      .option("header", "true")
+      .csv(input)
+    df.createOrReplaceTempView("nyse")
+    df.printSchema()
 
-  // execute sql
-  val sql = """
+    // execute sql
+    val sql =
+      """
     SELECT
       stock_symbol,
       date,
@@ -46,12 +49,13 @@ object SparkS3BinaryData extends App {
       stock_symbol,
       date
   """
-  val result = spark.sql(sql)
+    val result = spark.sql(sql)
 
-  // save results as parquet
-  result.write
-    .mode("overwrite")
-    .option("compression", "gzip")
-    .parquet(output)
+    // save results as parquet
+    result.write
+      .mode("overwrite")
+      .option("compression", "gzip")
+      .parquet(output)
+  }
 
 }
