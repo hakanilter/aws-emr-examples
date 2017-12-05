@@ -2,7 +2,7 @@ package com.datapyro.emr.jdbc
 
 import java.util.Properties
 
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{SaveMode, SparkSession}
 
 /**
   * This example shows how to import a CSV file into a table
@@ -33,12 +33,15 @@ object SparkCSVToJDBC extends App {
     .option("sep", "\t")
     .option("header", "true")
     .csv(input)
+    .repartition(1024)
 
   // write to database
   val properties: Properties = new Properties
   properties.setProperty("user", user)
   properties.setProperty("password", pass)
 
-  df.write.jdbc(url, table, properties)
+  df.write
+    .mode(SaveMode.Overwrite)
+    .jdbc(url, table, properties)
 
 }
